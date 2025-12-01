@@ -1,0 +1,164 @@
+<div class="product-container">
+  <!-- Left: Product Gallery -->
+  <div class="product-gallery">
+    <img class="main-image" src="{{ product.featured_image |image_url :500 }}" alt="Product Image">
+
+    <div class="thumbnail-images">
+      {%- for media in product.media -%}
+      <img src="{{ media.preview_image |image_url : 200 }}" alt="Thumbnail 1" onclick="changeImage(this)">
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- Right: Product Details -->
+  <div class="product-details">
+    {% if section.settings.product %}
+      {% assign selected_product = section.settings.product %}
+      <h1 class="product-title">{{ selected_product.title }}</h1>
+      <p class="product-price">{{ selected_product.price | money }}</p>
+    {% else %}
+      <h1 class="product-title">Select a Product in Section Settings</h1>
+    {% endif %}
+    <button class="add-to-cart-btn">Add to Cart</button>
+  </div>
+</div>
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .product-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  /* Left Side: Product Gallery */
+  .product-gallery {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .thumbnail-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .thumbnail-images img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .thumbnail-images img:hover {
+    transform: scale(1.05);
+    border-color: #333;
+  }
+
+  /* Right Side: Product Details */
+  .product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .product-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .product-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e53935;
+    margin-bottom: 20px;
+  }
+
+  .add-to-cart-btn {
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #0056b3;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .product-container {
+      flex-direction: column;
+    }
+
+    .main-image {
+      height: 300px;
+    }
+
+    .thumbnail-images img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<script>
+  // Change main image when clicking thumbnail
+  function changeImage(el) {
+    const mainImage = document.querySelector('.main-image');
+    mainImage.src = el.src;
+  }
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Custom Product Section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Section",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+
