@@ -15,18 +15,18 @@
         "heading_text": "Welcome to our store!"
       }
     },
-    "featured_collection_product_fmhqbd": {
+    "featured_collection_product_p7igFc": {
       "type": "featured_collection-product",
       "name": "Featured Collection ",
       "settings": {
         "text": "Featured Products",
-        "collection": "ubaid",
+        "collection": "preparation",
         "heading-new-collection": "New Collection"
       }
     }
   },
   "order": [
     "heading",
-    "featured_collection_product_fmhqbd"
+    "featured_collection_product_p7igFc"
   ]
 }
