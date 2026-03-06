@@ -20,7 +20,7 @@
       "name": "Featured Collection ",
       "settings": {
         "text": "Featured Products",
-        "collection": "preparation",
+        "collection": "essentials",
         "heading-new-collection": "New Collection"
       }
     }
